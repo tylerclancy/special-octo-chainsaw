@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 
@@ -62,6 +61,21 @@ function App() {
     };
 
   }, [cards, pickOne, pickTwo]);
+
+  // If user has found all matches.
+  useEffect(() => {
+
+    // Check for any remaining card matches.
+    const checkWin = cards.filter((card) => !card.matched);
+
+    // All matches made, handle win count.
+    if (cards.length && checkWin.length < 1) {
+      console.log('You win!');
+      setWins(wins + 1);
+      handleTurn();
+      setCards(shuffle);
+    }
+  }, [cards, wins]);
 
 
   return (
