@@ -6,12 +6,16 @@ import shuffle from './utilities/shuffle';
 import Card from './components/Card.js';
 import Header from './components/Header.js';
 
+import useAppBadge from './hooks/useAppBadge.js';
+
 function App() {
   const [cards, setCards] = useState(shuffle); // Cards array from assets.
   const [pickOne, setPickOne] = useState(null); // User's first selection.
   const [pickTwo, setPickTwo] = useState(null); // User's second selection.
   const [disabled, setDisabled] = useState(null); // Delay between selections.
   const [wins, setWins] = useState(0);
+
+  const [setBadge, clearBadge] = useAppBadge(); // Handle app badge.
 
   function handleClick(card) {
     if (!disabled) {
@@ -27,6 +31,7 @@ function App() {
 
   // Restart the game.
   function handleNewGame() {
+    clearBadge();
     setWins(0);
     handleTurn();
     setCards(shuffle);
@@ -81,6 +86,7 @@ function App() {
       console.log('You win!');
       setWins(wins + 1);
       handleTurn();
+      setBadge();
       setCards(shuffle);
     }
   }, [cards, wins]);

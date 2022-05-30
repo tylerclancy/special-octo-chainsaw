@@ -39,7 +39,7 @@ body {
   width: 100vw;
   padding: 1rem;
   display: flex;
-  overflow: hidden;
+  overflow: auto;
   color: var(--text);
   background: var(--bg);
   align-items: flex-start;
